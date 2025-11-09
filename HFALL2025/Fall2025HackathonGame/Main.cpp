@@ -11,11 +11,10 @@ using namespace sf;
 using namespace std;
 
 //--- Globals --//
-// Text
 TextureHolder holder;
-
 Mascot lulu;
 
+// Text
 Font font;
 Text userInput;
 sf::String inputString;
@@ -170,14 +169,22 @@ void renderScene(RenderWindow& window) {
 	//---- Start tasky loop -------//
 	float y = 100.f;
 	for (const auto& t : taskList) {
+
 		// Sticky note background
 		sf::RectangleShape noteBox(sf::Vector2f(300.f, 80.f));
 		noteBox.setPosition(50.f, y);
-		noteBox.setFillColor(sf::Color(255, 255, 150));  // light yellow
+
+		// Color logic
+		if (t.getCompleted()) {
+			noteBox.setFillColor(sf::Color(180, 255, 180));   // light green for done
+		}
+		else {
+			noteBox.setFillColor(sf::Color(255, 255, 150));   // yellow for active
+		}
 		noteBox.setOutlineColor(sf::Color(200, 180, 80));
 		noteBox.setOutlineThickness(2.f);
 
-		// Drop shadow (optional)
+		// Drop shadow
 		sf::RectangleShape shadow(noteBox);
 		shadow.move(5.f, 5.f);
 		shadow.setFillColor(sf::Color(0, 0, 0, 60));

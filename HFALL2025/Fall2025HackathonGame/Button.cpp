@@ -37,7 +37,7 @@ void Button::setPosition(sf::Vector2f position)
 
 bool Button::buttonHandling(sf::RenderWindow& window, sf::Event& event, float dt)
 {
-	cout << "button works" << endl;
+	//cout << "button works" << endl;
 	if (isClicked) {
 		timeSinceClick += dt;
 		if (timeSinceClick >= 1.0f) {

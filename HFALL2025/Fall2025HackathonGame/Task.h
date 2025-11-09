@@ -21,6 +21,9 @@ private:
     // Optional text note with extra details
     std::string note;
 
+    // completed flag
+    bool isCompleted = false;
+
 public:
     // CONSTRUCTOR
     Task(std::string title, int day, int month, int year, int difficulty, std::string note = "");
@@ -37,4 +40,6 @@ public:
     // title getter
     std::string getTitle() const { return title; }
 
+    void markCompleted() { isCompleted = true; }
+    bool getCompleted() const { return isCompleted; }
 };
