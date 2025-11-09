@@ -1,7 +1,6 @@
 #include "Task.h"
 using namespace std;
 
-
 Task::Task(string title, int day, int month, int year, int difficulty, string note) {
 	this->title = title;
 	dueDate.tm_mday = day;
@@ -18,7 +17,6 @@ Task::Task(string title, int day, int month, int year, int difficulty, string no
 
 int Task::complete() {
 	int pointVal;
-	isCompleted = true;
 	time_t dueTime = mktime(&dueDate);
 	time_t currTime = time(0);
 	if (currTime <= dueTime) {

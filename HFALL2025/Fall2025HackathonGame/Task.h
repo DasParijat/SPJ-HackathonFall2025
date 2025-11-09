@@ -9,10 +9,8 @@ private:
 	struct tm dueDate;
 	int difficulty;
 	std::string note;
-	bool isCompleted = false;
 
 public:
 	Task(std::string title, int day, int month, int year, int difficulty, std::string note = "");
 	int complete();
-
 };
