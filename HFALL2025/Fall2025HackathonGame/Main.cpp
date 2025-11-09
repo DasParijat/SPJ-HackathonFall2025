@@ -28,10 +28,10 @@ void finalizeGame();
 Button menuButton;
 
 int main() {
-	VideoMode vm(1024, 1024);
+	VideoMode vm(800, 600);
 	RenderWindow window(vm, "Fall 2025 HACKATHON");
 
-	View view(FloatRect(0, 0, 1024, 1024));
+	View view(FloatRect(0, 0, 800, 600));
 	window.setView(view);
 	
 	/*
@@ -131,7 +131,7 @@ void renderScene(RenderWindow& window) {
 	window.draw(menuButton.getSprite());
 
 	// Draw the text input box last so it’s visible above the button
-	window.draw(userInput);
+	userBox.draw(window);
 
 	// Display everything
 	window.display();
@@ -152,8 +152,8 @@ void initializeGame() {
 	menuButton.setPosition(Vector2f(30, 30));
 
 	userBox.setFont(font);
-	userBox.setPosition(50.f, 900.f);
-	userBox.setBoxSize(600.f, 40.f);
+	userBox.setPosition(50.f, 520.f);  // near bottom of an 800×600 window
+	userBox.setBoxSize(700.f, 40.f);   // fill most of width
 
 	Task demoTask("Hackathon Demo", 9, 11, 2025, 3);
 	int points = demoTask.complete();

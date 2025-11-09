@@ -7,6 +7,7 @@ private:
     sf::Text text;        // The drawable text object
     sf::RectangleShape box; // Optional background box
     std::string content;  // Stores the typed string
+    bool isActive = false;   // True only when the user has clicked inside the box
 
 public:
     TextInput();
