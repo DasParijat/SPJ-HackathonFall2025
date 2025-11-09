@@ -133,6 +133,13 @@
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Task.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="Mascot.h" />
+    <ClInclude Include="Task.h" />
+    <ClInclude Include="TextInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
