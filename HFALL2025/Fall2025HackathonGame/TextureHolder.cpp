@@ -1,4 +1,5 @@
 #include "TextureHolder.h"
+#include <iostream>
 
 using namespace sf;
 using namespace std;
@@ -39,7 +40,9 @@ Texture& TextureHolder::GetTexture(string const& filename)
         // Create a new key value pair using the filename
         auto& texture = m[filename];
         // Load the texture from file in the usual way
-        texture.loadFromFile(filename);
+        if (!texture.loadFromFile(filename)) {
+            std::cout << "Error loading texture\n";
+        }
         // Return the texture to the calling code
         return texture;
     }

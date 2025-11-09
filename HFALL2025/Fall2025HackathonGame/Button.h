@@ -8,14 +8,15 @@ protected:
 	bool isClicked = false;
 	float timeSinceClick = 0.0f;
 
-	std::string defaultTexture = "graphics/lulu1.jpeg";
-	std::string hoverTexture = "graphics/lulu2.jpeg";
-	std::string clickedTexture = "graphics/lulu3.jpeg";
+	std::string defaultTexture = "graphics/lulu1.jpg";
+	std::string hoverTexture = "graphics/lulu2.jpg";
+	std::string clickedTexture = "graphics/lulu3.jpg";
 
 public:
 	
 	sf::FloatRect getGlobalBounds();
 	sf::Sprite getSprite();
+	void setPosition(sf::Vector2f position);
 
 	bool buttonHandling(sf::RenderWindow& window, sf::Event& event, float dt);
 };

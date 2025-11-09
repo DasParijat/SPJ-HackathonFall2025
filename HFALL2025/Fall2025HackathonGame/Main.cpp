@@ -14,7 +14,7 @@ sf::String inputString;
 
 
 void gameLoop(RenderWindow& window);
-void handleInput(RenderWindow& window);
+void handleInput(RenderWindow& window, float dt);
 void updateGame(float dt);
 void renderScene(RenderWindow& window);
 
@@ -29,7 +29,8 @@ int main() {
 
 	View view(FloatRect(0, 0, 1024, 1024));
 	window.setView(view);
-
+	
+	/*
 	while (window.isOpen()) {
 		Clock clock;
 		sf::Event event;
@@ -46,10 +47,11 @@ int main() {
 		window.draw(menuButton.getSprite());
 		window.display();
 	}
+	*/
 
 	// TODO fix up game loop when hackathon starts
 	// initializeGame();
-	// gameLoop(window);
+	gameLoop(window);
 	// finalizeGame();
 
 	return 0;
@@ -62,8 +64,8 @@ void gameLoop(RenderWindow& window) {
 
 	while (window.isOpen()) {
 		float dt = clock.restart().asSeconds();
-		handleInput(window);
-		updateGame(dt);
+		handleInput(window, dt);
+		// updateGame(dt);
 		renderScene(window);
 	}
 
@@ -71,9 +73,11 @@ void gameLoop(RenderWindow& window) {
 
 }
 
-void handleInput(RenderWindow& window) {
+void handleInput(RenderWindow& window, float dt) {
 	Event event;
 	while (window.pollEvent(event)) {
+		menuButton.buttonHandling(window, event, dt);
+
 		switch (event.type) {
 		case Event::Closed:
 			window.close();
@@ -116,6 +120,7 @@ void renderScene(RenderWindow& window) {
 	window.clear();
 
 	// window.draw(counter);
+	window.draw(menuButton.getSprite());
 	window.draw(userInput);
 	window.display();
 }
@@ -131,6 +136,8 @@ void initializeGame() {
 	userInput.setFillColor(Color::White);
 	userInput.setPosition(50, 900);
 	userInput.setString("");
+
+	menuButton.setPosition(Vector2f(30, 30));
 
 }
 

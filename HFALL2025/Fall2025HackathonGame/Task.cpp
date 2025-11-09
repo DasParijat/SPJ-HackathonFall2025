@@ -28,5 +28,4 @@ int Task::complete() {
 	} // else
 	return pointVal;
 } // complete
-
 */

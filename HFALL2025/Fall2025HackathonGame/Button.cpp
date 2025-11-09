@@ -2,6 +2,8 @@
 #include "TextureHolder.h"
 #include <iostream>
 
+using namespace std;
+
 sf::FloatRect Button::getGlobalBounds()
 {
 	return sprite.getGlobalBounds();
@@ -9,17 +11,27 @@ sf::FloatRect Button::getGlobalBounds()
 
 sf::Sprite Button::getSprite()
 {
+	/*
 	if (!isVisible) {
 		sprite.setColor(sf::Color(255, 255, 255, 0));
 	}
 	else {
 		sprite.setColor(sf::Color(255, 255, 255, 255));
 	}
+	*/
+
 	return sprite;
 }
 
+void Button::setPosition(sf::Vector2f position)
+{
+	sprite.setPosition(position);
+}
+
+
 bool Button::buttonHandling(sf::RenderWindow& window, sf::Event& event, float dt)
 {
+	cout << "button works" << endl;
 	if (isClicked) {
 		timeSinceClick += dt;
 		if (timeSinceClick >= 1.0f);
