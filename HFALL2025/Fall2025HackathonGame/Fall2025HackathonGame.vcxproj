@@ -141,12 +141,6 @@
     <ClInclude Include="Task.h" />
     <ClInclude Include="TextInput.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Button.h" />
-    <ClInclude Include="Mascot.h" />
-    <ClInclude Include="Task.h" />
-    <ClInclude Include="TextInput.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

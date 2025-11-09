@@ -1,5 +1,7 @@
 #include <iostream>
+#include <vector>
 #include "SFML/Graphics.hpp"
+#include "Button.h"
 
 using namespace sf;
 using namespace std;
@@ -19,6 +21,7 @@ void renderScene(RenderWindow& window);
 void initializeGame();
 void finalizeGame();
 
+Button menuButton;
 
 int main() {
 	VideoMode vm(1024, 1024);
@@ -27,9 +30,23 @@ int main() {
 	View view(FloatRect(0, 0, 1024, 1024));
 	window.setView(view);
 
+	while (window.isOpen()) {
+		sf::Event event;
+		while (window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed)
+				window.close();
+
+			menuButton.buttonHandling(window, event);
+		}
+
+		window.clear();
+		window.draw(menuButton.getSprite());
+		window.display();
+	}
+
 	// TODO fix up game loop when hackathon starts
 	// initializeGame();
-	gameLoop(window);
+	// gameLoop(window);
 	// finalizeGame();
 
 	return 0;
