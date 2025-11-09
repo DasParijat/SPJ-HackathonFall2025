@@ -11,11 +11,10 @@ using namespace sf;
 using namespace std;
 
 //--- Globals --//
-// Text
 TextureHolder holder;
-
 Mascot lulu;
 
+// Text
 Font font;
 Text userInput;
 sf::String inputString;
@@ -154,18 +153,46 @@ void renderScene(RenderWindow& window) {
 	lulu.draw(window);
 	window.draw(luluText);
 
-	float y = 100.f;
-	sf::Text taskText;
-	taskText.setFont(font);
-	taskText.setCharacterSize(24);
-	taskText.setFillColor(sf::Color::White);
 
+	//---- Start tasky loop -------//
+	float y = 100.f;
 	for (const auto& t : taskList) {
-		taskText.setString("- " + t.getTitle());
-		taskText.setPosition(50.f, y);
-		window.draw(taskText);
-		y += 30.f;
+
+		// Sticky note background
+		sf::RectangleShape noteBox(sf::Vector2f(300.f, 80.f));
+		noteBox.setPosition(50.f, y);
+
+		// Color logic
+		if (t.getCompleted()) {
+			noteBox.setFillColor(sf::Color(180, 255, 180));   // light green for done
+		}
+		else {
+			noteBox.setFillColor(sf::Color(255, 255, 150));   // yellow for active
+		}
+		noteBox.setOutlineColor(sf::Color(200, 180, 80));
+		noteBox.setOutlineThickness(2.f);
+
+		// Drop shadow
+		sf::RectangleShape shadow(noteBox);
+		shadow.move(5.f, 5.f);
+		shadow.setFillColor(sf::Color(0, 0, 0, 60));
+
+		// Task text
+		sf::Text titleText;
+		titleText.setFont(font);
+		titleText.setCharacterSize(20);
+		titleText.setFillColor(sf::Color::Black);
+		titleText.setString(t.getTitle());
+		titleText.setPosition(noteBox.getPosition().x + 10.f, noteBox.getPosition().y + 10.f);
+
+		// Draw shadow, box, and text
+		window.draw(shadow);
+		window.draw(noteBox);
+		window.draw(titleText);
+
+		y += 100.f;  // space between notes
 	}
+	//---- End tasky loop -------//
 
 	// Display everything
 	window.display();
