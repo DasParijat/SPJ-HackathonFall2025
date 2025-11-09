@@ -13,6 +13,8 @@ TextInput::TextInput() {
     text.setCharacterSize(28);
     text.setFillColor(sf::Color::White);
     text.setPosition(15.f, 8.f);
+
+    text.setString("Enter task here");
 }
 
 
@@ -54,7 +56,7 @@ void TextInput::handleEvent(sf::Event& event) {
             // Backspace key
             content.pop_back();
         }
-        else if (event.text.unicode >= 32 && event.text.unicode < 128) {
+        else if (event.text.unicode >= 32 && event.text.unicode < 128 && content.length() <= 30) {
             // Printable characters
             content += static_cast<char>(event.text.unicode);
         }
