@@ -7,10 +7,10 @@
 #include "Mascot.h"
 #include "TextureHolder.h"
 
-
 using namespace sf;
 using namespace std;
 
+//--- Globals --//
 // Text
 TextureHolder holder;
 
@@ -20,6 +20,11 @@ Font font;
 Text userInput;
 sf::String inputString;
 TextInput userBox;
+
+//Tasks
+std::vector<Task> taskList;  // store created tasks
+
+
 
 void gameLoop(RenderWindow& window);
 void handleInput(RenderWindow& window, float dt);
@@ -115,6 +120,28 @@ void handleInput(RenderWindow& window, float dt) {
 			break;
 		}
 	}
+
+	// After processing events
+	if (userBox.hasSubmitted) {
+		std::string taskTitle = userBox.getString();
+		userBox.clear();
+		userBox.hasSubmitted = false;
+
+		// Create a new Task with today’s date and difficulty 1 (for now)
+		time_t now = time(0);
+		tm local{};
+		localtime_s(&local, &now);  // thread-safe version
+
+		int day = local.tm_mday;
+		int month = local.tm_mon + 1;
+		int year = local.tm_year + 1900;
+
+		Task newTask(taskTitle, day, month, year, 1);
+		taskList.push_back(newTask);
+
+		std::cout << "Created Task: " << taskTitle << std::endl;
+	}
+
 }
 
 void updateGame(float dt) {
@@ -138,6 +165,19 @@ void renderScene(RenderWindow& window) {
 
 	// Draw the text input box last so it’s visible above the button
 	userBox.draw(window);
+
+	float y = 100.f;
+	sf::Text taskText;
+	taskText.setFont(font);
+	taskText.setCharacterSize(24);
+	taskText.setFillColor(sf::Color::White);
+
+	for (const auto& t : taskList) {
+		taskText.setString("- " + t.getTitle());
+		taskText.setPosition(50.f, y);
+		window.draw(taskText);
+		y += 30.f;
+	}
 
 	// Display everything
 	window.display();
