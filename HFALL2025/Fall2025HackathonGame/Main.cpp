@@ -20,6 +20,7 @@ Text userInput;
 sf::String inputString;
 TextInput userBox;
 Text luluText;
+Text levelText;
 
 float textUpdate;
 float progTimeTotal;
@@ -210,6 +211,13 @@ void updateGame(float dt) {
 		textUpdate = progTimeTotal + (rand() % 10 + 5);
 
 	}
+
+	// Update levelText
+	stringstream streamLevel;
+	streamLevel <<
+		"Level: " <<
+		lulu.getLevel();
+	levelText.setString(streamLevel.str());
 }
 
 void renderScene(RenderWindow& window) {
@@ -220,6 +228,7 @@ void renderScene(RenderWindow& window) {
 
 	lulu.draw(window);
 	window.draw(luluText);
+	window.draw(levelText);
 
 	// Draw interactive buttons
 	window.draw(menuButton.getSprite());
@@ -285,6 +294,11 @@ void initializeGame() {
 	luluText.setFillColor(Color::White);
 	luluText.setPosition(25, 550);
 	luluText.setString("I'm so excited to be\nyour task manager!");
+
+	levelText.setFont(font);
+	levelText.setCharacterSize(25);
+	levelText.setFillColor(Color::White);
+	levelText.setPosition(80, 320);
 
 	userInput.setFont(font);
 	userInput.setCharacterSize(30);
