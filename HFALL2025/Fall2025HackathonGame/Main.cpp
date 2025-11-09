@@ -86,6 +86,7 @@ void handleInput(RenderWindow& window, float dt) {
 			points += taskList.front().complete();
 			taskList.erase(taskList.begin());
 		}
+
 		userBox.handleEvent(event);
 
 		switch (event.type) {

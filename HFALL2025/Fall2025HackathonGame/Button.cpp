@@ -40,11 +40,11 @@ void Button::setVisibility(bool isVisible)
 
 bool Button::buttonHandling(sf::RenderWindow& window, sf::Event& event, float dt)
 {
+	isClicked = false;
 	if (isClicked) {
 		timeSinceClick += dt;
 		if (timeSinceClick >= 0.1f) {
 			sprite.setTexture(TextureHolder::GetTexture(defaultTexture));
-			isClicked = false;
 			timeSinceClick = 0.0f;
 		}
 	}
