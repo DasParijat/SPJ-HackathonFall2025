@@ -3,6 +3,8 @@
 #include "SFML/Graphics.hpp"
 #include "Button.h"
 #include "Task.h"
+#include "TextInput.h"
+
 
 using namespace sf;
 using namespace std;
@@ -11,6 +13,7 @@ using namespace std;
 Font font;
 Text userInput;
 sf::String inputString;
+TextInput userBox;
 
 
 
@@ -78,6 +81,7 @@ void handleInput(RenderWindow& window, float dt) {
 	Event event;
 	while (window.pollEvent(event)) {
 		menuButton.buttonHandling(window, event, dt);
+		userBox.handleEvent(event);
 
 		switch (event.type) {
 		case Event::Closed:
@@ -89,17 +93,17 @@ void handleInput(RenderWindow& window, float dt) {
 				return;
 			}
 
-		case Event::TextEntered:
-			if (event.text.unicode == 8 && !inputString.isEmpty()) {
-				// Handle backspace
-				inputString.erase(inputString.getSize() - 1, 1);
-			}
-			else if (event.text.unicode < 128 && event.text.unicode != 8) {
-				// Add normal characters (ASCII only)
-				inputString += static_cast<char>(event.text.unicode);
-			}
-			userInput.setString(inputString);
-			break;
+		//case Event::TextEntered:
+		//	if (event.text.unicode == 8 && !inputString.isEmpty()) {
+		//		// Handle backspace
+		//		inputString.erase(inputString.getSize() - 1, 1);
+		//	}
+		//	else if (event.text.unicode < 128 && event.text.unicode != 8) {
+		//		// Add normal characters (ASCII only)
+		//		inputString += static_cast<char>(event.text.unicode);
+		//	}
+		//	userInput.setString(inputString);
+		//	break;
 
 		default:
 			break;
@@ -120,9 +124,16 @@ void updateGame(float dt) {
 void renderScene(RenderWindow& window) {
 	window.clear();
 
+	// Draw background or static UI
 	// window.draw(counter);
+
+	// Draw interactive buttons
 	window.draw(menuButton.getSprite());
+
+	// Draw the text input box last so it’s visible above the button
 	window.draw(userInput);
+
+	// Display everything
 	window.display();
 }
 
@@ -139,6 +150,10 @@ void initializeGame() {
 	userInput.setString("");
 
 	menuButton.setPosition(Vector2f(30, 30));
+
+	userBox.setFont(font);
+	userBox.setPosition(50.f, 900.f);
+	userBox.setBoxSize(600.f, 40.f);
 
 	Task demoTask("Hackathon Demo", 9, 11, 2025, 3);
 	int points = demoTask.complete();
